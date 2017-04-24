@@ -1,0 +1,61 @@
+#!/bin/bash
+
+file_name=$1
+class_column=${2:-5}
+column_separator=','
+
+z1=25
+z2=25
+z3=50
+
+total=$(cat $file_name | wc -l)
+
+z1_total=$(( $total  * $z1 / 100))
+z2_total=$(( $total  * $z2 / 100))
+z3_total=$(( $total  * $z3 / 100))
+
+classes=$(cat $file_name | cut -d$column_separator -f$class_column | uniq)
+itens_per_class_z1=$(($z1_total / $(wc -l <<< $classes)))
+itens_per_class_z2=$(($z2_total / $(wc -l <<< $classes)))
+itens_per_class_z3=$(($z3_total / $(wc -l <<< $classes)))
+
+z1_content=""
+z2_content=""
+IFS='
+'
+for line in $(cat $file_name)
+do
+    current_class=$(cut -d$column_separator -f$class_column <<< "$line")
+
+    itens_of_class_on_z1=$(echo "$z1_content" | cut -d$column_separator -f$class_column | grep $current_class | wc -l)
+    if [ $itens_of_class_on_z1 -lt $itens_per_class_z1 ]
+    then
+        z1_content="$z1_content
+$line"
+        continue
+    fi
+
+
+    itens_of_class_on_z2=$(echo "$z2_content" | cut -d$column_separator -f$class_column | grep $current_class | wc -l)
+    if [ $itens_of_class_on_z2 -lt $itens_per_class_z2 ]
+    then
+        z2_content="$z2_content
+$line"
+        continue
+    fi
+
+    itens_of_class_on_z3=$(echo "$z3_content" | cut -d$column_separator -f$class_column | grep $current_class | wc -l)
+    if [ $itens_of_class_on_z3 -lt $itens_per_class_z3 ]
+    then
+        z3_content="$z3_content
+$line"
+        continue
+    fi
+done
+
+
+echo "$z1_content" | tail -n +2 > "$file_name.z1"
+echo "$z2_content" | tail -n +2 > "$file_name.z2"
+echo "$z3_content" | tail -n +2 > "$file_name.z3"
+
+
