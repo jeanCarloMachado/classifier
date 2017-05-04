@@ -1,0 +1,33 @@
+ON z2
+K:1 error_rate:0
+ K:2 error_rate:5
+ K:3 error_rate:5
+ K:4 error_rate:5
+ K:5 error_rate:8
+ K:6 error_rate:11
+ K:7 error_rate:19
+ K:8 error_rate:25
+ K:9 error_rate:25
+ K:10 error_rate:30
+ K:11 error_rate:33
+ K:12 error_rate:33
+ K:13 error_rate:66
+ K:14 error_rate:66
+ K:15 error_rate:66
+
+ON z3
+K:1 error_rate:5
+K:2 error_rate:2
+K:3 error_rate:2
+K:4 error_rate:4
+K:5 error_rate:9
+K:6 error_rate:10
+K:7 error_rate:21
+K:8 error_rate:22
+K:9 error_rate:30
+K:10 error_rate:32
+K:11 error_rate:33
+K:12 error_rate:33
+K:13 error_rate:66
+K:14 error_rate:66
+K:15 error_rate:66

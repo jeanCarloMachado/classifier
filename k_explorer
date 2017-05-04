@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for i in $(seq 1 36)
+do
+    export CUSTOM_K=$i
+    result=$(./error_rate "$1")
+    echo " K:$i error_rate:$result"
+done

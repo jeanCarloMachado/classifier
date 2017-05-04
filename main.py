@@ -2,10 +2,12 @@ import sys
 import math
 import json
 import re
+import os
 
-k_distance = 5
+k_distance = int(os.getenv('CUSTOM_K', 2))
+
 target = sys.stdin.readlines()[0].split(',')
-target_class = target[-1]
+target_class = target[-1].split('\n')[0]
 
 file = open("data/iris.data.z1")
 swarm = file.read()
@@ -44,4 +46,6 @@ for i in range(0, k_distance):
         classes[entity_distance_list[i]["label"]] = 1
 
 result = (max(classes))
-print("Given: " + target_class + "Guessed: " + result)
+print("Given: " + target_class )
+print("Guessed: " + result )
+print("Result:" + str(target_class == result))
