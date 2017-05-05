@@ -48,4 +48,5 @@ for i in range(0, k_distance):
 result = (max(classes))
 print("Given: " + target_class )
 print("Guessed: " + result )
+print("Data: " + str(target) )
 print("Result:" + str(target_class == result))
