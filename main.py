@@ -6,17 +6,17 @@ import os
 
 k_distance = int(os.getenv('CUSTOM_K', 2))
 
-target = sys.stdin.readlines()[0].split(',')
-target_class = target[-1].split('\n')[0]
+target = sys.stdin.readlines()[0].split('\n')[0].split(',')
+target_class = target[-1]
 
-file = open("data/iris.data.z1")
-swarm = file.read()
-swarm = swarm.split('\n')
-swarm = filter(lambda x: not re.match(r'^\s*$', x), swarm)
-swarm = list(map(lambda entity: entity.split(','), swarm))
+z1_file = open(sys.argv[1])
+z1 = z1_file.read()
+z1 = z1.split('\n')
+z1 = filter(lambda x: not re.match(r'^\s*$', x), z1)
+z1 = list(map(lambda entity: entity.split(','), z1))
 
 entity_distance_list = []
-for (i, entity) in enumerate(swarm):
+for (i, entity) in enumerate(z1):
     distance = 0
     label = entity.pop(-1)
     for (j, attribute) in enumerate(entity):

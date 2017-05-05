@@ -1,8 +1,8 @@
 #!/bin/bash
 
 file_name=$1
-class_column=${2:-5}
 column_separator=','
+class_column=$(cat $file_name | head -n 1 | sed 's/[^,]//g' | wc -c )
 
 z1=25
 z2=25

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in $(seq 1 36)
+for i in $(seq 1 100)
 do
     export CUSTOM_K=$i
     result=$(./error_rate "$1")

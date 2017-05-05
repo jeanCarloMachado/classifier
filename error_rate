@@ -1,12 +1,13 @@
 #!/bin/bash
 
 file="$1"
+file_z1=$(echo $file | sed "s/2/1/g")
 
 error_counter=0
 lines=0
 for line in $(cat $file)
 do
-    result=$(echo $line | python main.py)
+    result=$(echo $line | python main.py $file_z1)
     [ ! $( echo "$result" | grep Result | grep True) ] && {
         error_counter=$(( $error_counter + 1 ))
         [ ! -z ${SHOW_ERROR_ENTRY+a} ] && {
